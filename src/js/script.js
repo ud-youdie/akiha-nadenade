@@ -21,7 +21,7 @@ $(function(){
             "src": imgPath.replace("{0}", id)
         }).one("load",()=>{
             loadCounter += 1;
-            $("#count").text(loadCounter);
+            $("#count").text(Math.round(loadCounter / 36 * 100) + "%");
         }).appendTo("#view");
     }
 
