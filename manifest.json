@@ -3,7 +3,7 @@
   "short_name": "なで晶葉",
   "display": "fullscreen",
   "orientation": "portrait",
-  "start_url": "/",
+  "start_url": ".",
   "icons": [
     {
       "src": "images/icons/icon-72x72.png",
