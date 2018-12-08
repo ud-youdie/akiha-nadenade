@@ -11,7 +11,7 @@ $(function(){
         "height": "100%",
         "text-align": "center",
         "background-color": "#ffffff"
-    });
+    }).appendTo("body");
 
     const imgPath = "./src/img/akiha_{0}.png";
     const frameCount = 49;
@@ -89,5 +89,5 @@ $(function(){
         var id = ('000' + val).slice( -3 );
         $images.hide();
         $images.filter("#" + id).show();
-    });
+    }).hide();
 });
