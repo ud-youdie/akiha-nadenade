@@ -36,6 +36,30 @@ $(function(){
         }
     }, 10);
 
+    var obniz = new Obniz("4288-2312");
+    obniz.onconnect = async ()=> {
+        // embed parts
+        obniz.display.print("hello!");
+        obniz.switch.onchange = function(state) {
+          $('body').css({
+            "background-color" : (state == "push") ? "#F00" : "#FFF"
+            });
+        }
+    
+        var $range = $("#range");
+        var sensor = obniz.wired("GP2Y0A21YK0F", {vcc:0, gnd:1, signal:2})
+        sensor.start(async (distance)=>{
+            await obniz.wait(100);
+//            obniz.display.clear();
+//            obniz.display.print("distance " + distance + " mm \n");
+            if(500 < distance) return;
+            var val = frameCount - Math.round((distance - 150) / 10);
+            $range.val(val).trigger("input");
+//            obniz.display.print("val " + val);
+        })
+
+    }
+
     $("#range").on("input", ()=>{
         var val = $("#range").val();
         var id = ('000' + val).slice( -3 );
