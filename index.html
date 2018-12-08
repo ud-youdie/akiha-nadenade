@@ -2,7 +2,6 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <link rel="manifest" href="manifest.json">
         <link rel="stylesheet" href="src/css/style.css" />
         <script
         src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -21,17 +20,5 @@
         <div>
             <input type="range" id="range" value="0" min="0" max="49" step="1" />
         </div>
-        <script>
-            window.addEventListener('load', function() {
-              if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register("./serviceWorker.js")
-                  .then(function(registration) {
-                    console.log("serviceWorker registed.");
-                  }).catch(function(error) {
-                    console.warn("serviceWorker error.", error);
-                  });
-              }
-            });
-        </script>
     </body>
 </html>

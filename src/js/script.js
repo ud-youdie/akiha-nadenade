@@ -1,6 +1,5 @@
 $(function(){
 
-
     $("<div id='waiting'>" +
         "<p>loading... <span id='count'></span></p>" +
     "</div>").css({
@@ -50,37 +49,21 @@ $(function(){
         }
     
         var $range = $("#range");
-        var animating = false;
+        const buffer = 60;
         var sensor = obniz.wired("GP2Y0A21YK0F", {vcc:0, gnd:1, signal:2})
         sensor.start(async (distance)=>{
 
-            await obniz.wait(100);
+            await obniz.wait(1);
 
-            if(180 < distance) {
+            if((frameCount + 1) * 2 + buffer < distance) {
                 return;
             }
-            /*
-            if(500 < distance || animating || $range.val() == frameCount) {
-                return;
-            }
-            */
-            var val = frameCount - Math.round(((distance - 80) / 2) - 1);
+
+            var val = frameCount - Math.round(((distance - buffer) / 2) - 1);
             if (val < 0) val = 0;
             $range.val(val).trigger("input");
             $("#val").text("distance:" + distance + ",val:" + val);
 
-            /*
-            animating = true;
-            var i = 0;
-            var si = setInterval(()=>{
-                $range.val(i).trigger("input");
-                i++;
-                if(frameCount < i) {
-                    animating = false;
-                    clearInterval(si);
-                }
-            },10);
-            */
         })
     }
 
