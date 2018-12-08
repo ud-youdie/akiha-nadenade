@@ -24,7 +24,7 @@ $(function(){
             "src": imgPath.replace("{0}", id)
         }).one("load",()=>{
             loadCounter += 1;
-            $("#count").text(Math.round(loadCounter / 36 * 100) + "%");
+            $("#count").text(Math.round(loadCounter / (frameCount + 1) * 100) + "%");
         }).appendTo("#view");
     }
 
