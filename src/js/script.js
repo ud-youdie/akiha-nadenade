@@ -14,7 +14,7 @@ $(function(){
     });
 
     const imgPath = "./src/img/akiha_{0}.png";
-    const frameCount = 59;
+    const frameCount = 49;
     var loadCounter = 0;
 
     for (let i = 0; i <= frameCount; i++) {
@@ -54,18 +54,22 @@ $(function(){
         var sensor = obniz.wired("GP2Y0A21YK0F", {vcc:0, gnd:1, signal:2})
         sensor.start(async (distance)=>{
 
-            await obniz.wait(200);
+            await obniz.wait(100);
 
+            if(180 < distance) {
+                return;
+            }
+            /*
             if(500 < distance || animating || $range.val() == frameCount) {
                 return;
             }
+            */
+            var val = frameCount - Math.round(((distance - 80) / 2) - 1);
+            if (val < 0) val = 0;
+            $range.val(val).trigger("input");
+            $("#val").text("distance:" + distance + ",val:" + val);
 
             /*
-            var val = frameCount - Math.round((distance - 50) / 10);
-            $range.val(val).trigger("input");
-            $("#val").text(val);
-            */
-
             animating = true;
             var i = 0;
             var si = setInterval(()=>{
@@ -76,6 +80,7 @@ $(function(){
                     clearInterval(si);
                 }
             },10);
+            */
         })
     }
 
